@@ -99,7 +99,7 @@ exports.deposit = async(req, res)=>{
 
       res.status(200).json({
         msg:'transaction successful',
-        transaction
+      
       })
 
       }catch(error){
