@@ -29,7 +29,7 @@ exports.sendmail = async(options) => {
    
 });
 
-console.log(process.env.HOST)
+
 
 const mailOptions = {
     from: 'DENEROX',

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 exports.protector = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
-    console.log('Authorization Header:', authHeader);
+    
 
     if (!authHeader || !authHeader.startsWith('Bearer')) {
       throw new Error('Authorization token is missing or invalid');
