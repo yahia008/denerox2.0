@@ -8,7 +8,7 @@ exports.Profile = async (req, res) => {
         const user = await User.findById(userId)
         if(!user) throw new Error('user not found')
             
-            return res.status(200).json({ success: true, user });
+            res.status(200).json({ success: true, user });
     }
     catch(error){
         return res.status(500).json({
