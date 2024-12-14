@@ -20,7 +20,7 @@ exports.generatejwt = (user) => {
 exports.sendmail = async(options) => {
     const transporter = nodemailer.createTransport({
     host: process.env.HOST, // Replace with your SMTP host
-    port: process.env.PORT, // Common SMTP port
+    port: 465, // Common SMTP port
     auth: {
         user: process.env.SMTP_USER, // Your SMTP username
         pass: process.env.SMTP_PASS, // Your SMTP password
