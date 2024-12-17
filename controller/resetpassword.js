@@ -8,7 +8,9 @@ exports.forgotPassword = async(req, res)=> {
     const user = await User.findOne({email})
     try{
        
-        if(!user) throw new Error('user not found')
+        if(!user) {
+            res.status(404).json({message:'email does not exist'})
+        }
 
          const token = user.resetToken();
          await user.save();

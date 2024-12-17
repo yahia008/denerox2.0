@@ -11,6 +11,7 @@ exports.transactionPin = async(req, res) =>
 
         const account = await Account.findOne({user:accountId})
         if(!account) throw new Error('invalid user')
+        if(account.pin) res.status(400).json({message:'A PIN has already been set for this account.'})
         
          const hashedPIN = bcrypt.hashSync(String(pin), 10)
 
@@ -45,7 +46,10 @@ exports.resetPin = async(req, res) => {
     res.status(200).json({msg:'resetpin sent'})
    }catch(error)
    {
-    account.otp=undefined
+    if (account) {
+        account.otp = undefined;
+        await account.save(); // Save the cleared OTP
+      }
     res.status(500).json({msg:error.message})
    }
 }
@@ -70,8 +74,11 @@ exports.verifyPin = async (req, res) => {
         res.status(200).json({msg:"pin  reset successfully"})
 
     }catch(error){
-     account.otp = undefined
-     account.pin=undefined
+        if (account) {
+            account.pin = undefined;
+            account.otp = undefined;
+            await account.save(); // Save the cleared OTP
+          }
      res.status(500).json({msg:error.message})
     }
 }
